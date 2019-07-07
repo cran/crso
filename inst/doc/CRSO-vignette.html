@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>CRSO-vignette</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">CRSO-vignette</h1>
+
+
+
+<p>This vignette presents an example workflow for CRSO. If a parallel backend is registered, CRSO will make use of all available registered workers. If not, it can still be run sequentially.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(crso)
+<span class="co">#&gt; Loading required package: foreach</span>
+### Load example dataset consisting of TCGA melanoma (SKCM) patients.
+<span class="kw">data</span>(skcm)
+<span class="kw">list2env</span>(skcm.list,<span class="dt">envir=</span><span class="kw">globalenv</span>())
+<span class="co">#&gt; &lt;environment: R_GlobalEnv&gt;</span>
+<span class="kw">names</span>(skcm.list) ### load D, P and cnv.dictionary
+<span class="co">#&gt; [1] &quot;D&quot;              &quot;P&quot;              &quot;cnv.dictionary&quot;</span>
+Q &lt;-<span class="st"> </span><span class="kw">log10</span>(P) ### Q is the penalty matrix derived from P</code></pre></div>
+<div id="specify-parameters" class="section level1">
+<h1>Specify parameters</h1>
+<p>The parameter values used are not the default values that are recommended in the CRSO paper, because the computation time may be excessive depending on the parallel availability. Instead, these were chosen to demonstrate how to use all of the functions in the package. The recommended parameter values are indicated in parentheses.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rule.thresh &lt;-<span class="st"> </span>.<span class="dv">05</span> <span class="co"># Minimum percentage of samples covered by each rule in the rule library. (Default = .03)</span>
+spr &lt;-<span class="st"> </span><span class="dv">4</span> <span class="co"># Phase 1 random sets per rule (default = 40, recommend at least 40) </span>
+trn &lt;-<span class="st"> </span><span class="dv">40</span> <span class="co"># Phase 1 stop criteria (default = 16, recommend at most 24)</span>
+k.max &lt;-<span class="st"> </span><span class="dv">6</span> <span class="co"># Maximum RS size (default is 12)</span>
+max.stored &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># Max RS stored per K in phases 2 and 3 (no default, recommend at least 10^4)</span>
+max.nrs.ee &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># Phase 2 max rs per K (default is 10^5, recommend at least 10^5)</span>
+max.compute &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">*</span>max.nrs.ee <span class="co"># Max raw im size for phase 2 (default is 10^6, recommend at least 10*max.nrs.ee)</span>
+max.nrs.borrow &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># Phase 3 max rs per K (default is 10^5, recommend at least 10^5)</span>
+filter.thresh &lt;-<span class="st"> </span>.<span class="dv">03</span> <span class="co"># minimum assignment threshold per rule set (default is .03)</span>
+### Generalized core parameters:
+num.gc.iter &lt;-<span class="st"> </span><span class="dv">10</span> <span class="co"># Number GC iterations (default is 100)</span>
+num.gc.eval &lt;-<span class="st"> </span><span class="dv">100</span> <span class="co"># Rulesets evaluated per K per GC iter (default is 1000)</span></code></pre></div>
+</div>
+<div id="phase-1" class="section level1">
+<h1>Phase 1</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">100</span>)
+rm.full &lt;-<span class="st"> </span><span class="kw">buildRuleLibrary</span>(D,rule.thresh) <span class="co"># build rule library</span>
+rm.ordered &lt;-<span class="st"> </span><span class="kw">makePhaseOneOrderedRM</span>(D,rm.full,spr,Q,trn,<span class="dt">shouldPrint =</span> <span class="ot">TRUE</span>) <span class="co"># run phase 1</span>
+<span class="co">#&gt; [1] &quot;Starting rules = 60&quot;</span>
+<span class="co">#&gt; Warning: executing %dopar% sequentially: no parallel backend registered</span>
+<span class="co">#&gt; [1] &quot;Remaining rules = 54&quot;</span>
+<span class="co">#&gt; [1] &quot;Remaining rules = 49&quot;</span>
+<span class="co">#&gt; [1] &quot;Remaining rules = 45&quot;</span>
+<span class="co">#&gt; [1] &quot;Remaining rules = 41&quot;</span>
+<span class="co">#&gt; [1] &quot;Remaining rules = 40&quot;</span>
+<span class="co">#&gt; Time difference of 0.4587963 mins</span></code></pre></div>
+</div>
+<div id="phase-2" class="section level1">
+<h1>Phase 2</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pool.sizes &lt;-<span class="st"> </span><span class="kw">getPoolSizes</span>(rm.ordered,k.max,max.nrs.ee,max.compute) 
+### The pool size for each K is the number of rules considered for exhaustive evaluation in phase 2.
+til.p2 &lt;-<span class="st"> </span><span class="kw">makePhaseTwoImList</span>(D,Q,rm.ordered,k.max,pool.sizes,max.stored,<span class="dt">shouldPrint =</span> <span class="ot">TRUE</span>) <span class="co"># Run phase 2</span>
+<span class="co">#&gt; [1] &quot;Starting Phase 2: Exhaustive Evaluation&quot;</span>
+<span class="co">#&gt; [1] &quot;Evaluation time for k = 2: 0.02526 min&quot;</span>
+<span class="co">#&gt; [1] &quot;Evaluation time for k = 3: 0.02557 min&quot;</span>
+<span class="co">#&gt; [1] &quot;Evaluation time for k = 4: 0.02728 min&quot;</span>
+<span class="co">#&gt; [1] &quot;Evaluation time for k = 5: 0.02103 min&quot;</span>
+<span class="co">#&gt; [1] &quot;Evaluation time for k = 6: 0.02239 min&quot;</span>
+<span class="co">#&gt; [1] &quot;Total Phase 2 Time: 0.127 min&quot;</span>
+### TIL stands for top index list. The output of phase two is a list of top index matrices for each k.  Each index matrix contains the rule sets ordered by performance. For example the best performing rule set of size 3 will be the first row of the K.3 index matrix. For K=1 the index matrix is actually a vector.</code></pre></div>
+</div>
+<div id="phase-3-and-filtering" class="section level1">
+<h1>Phase 3 and Filtering</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">til.p3 &lt;-<span class="st"> </span><span class="kw">makePhaseThreeImList</span>(D,Q,rm.ordered,til.p2,pool.sizes,max.stored,max.nrs.borrow,<span class="dt">shouldPrint =</span> <span class="ot">TRUE</span>)
+<span class="co">#&gt; [1] &quot;Starting Phase 3: neighbor expansion&quot;</span>
+<span class="co">#&gt; [1] &quot;Updated top im for K = 3, time = 0.09706 min&quot;</span>
+<span class="co">#&gt; [1] &quot;Updated top im for K = 4, time = 0.1444 min&quot;</span>
+<span class="co">#&gt; [1] &quot;Updated top im for K = 5, time = 0.1455 min&quot;</span>
+<span class="co">#&gt; [1] &quot;Updated top im for K = 6, time = 0.1626 min&quot;</span>
+<span class="co">#&gt; [1] &quot;Total Phase 3 Time: 0.5496 min&quot;</span>
+### Make TIL for phase 3 by updating phase two til to consider neighbor rule sets.
+
+til.filtered &lt;-<span class="st"> </span><span class="kw">makeFilteredImList</span>(D,Q,rm.ordered,til.p3,filter.thresh)
+### Filter the phase 3 results to only include rule sets for which every rule is assigned to a minimum percentage of samples, default is 3%
+tpl.filtered &lt;-<span class="st"> </span><span class="kw">evaluateListOfIMs</span>(D,Q,rm.ordered,til.filtered) 
+### Get top performance list (TPL), which contains the objective function score of all of the rule sets in til.filtered</code></pre></div>
+</div>
+<div id="extract-best-rule-sets-and-core-rule-set" class="section level1">
+<h1>Extract best rule sets and core rule set</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">best.rs.list &lt;-<span class="st"> </span><span class="kw">getBestRsList</span>(rm.ordered,tpl.filtered,til.filtered)
+### This is a list of the best rule sets for all K
+
+core.K &lt;-<span class="st"> </span><span class="kw">getCoreK</span>(D,rm.ordered,tpl.filtered,til.filtered) <span class="co"># Determine core K</span>
+core.ruleset &lt;-<span class="st"> </span><span class="kw">getCoreRS</span>(D,rm.ordered,tpl.filtered,til.filtered) <span class="co"># Extract core rule set</span>
+<span class="kw">print</span>(core.ruleset)
+<span class="co">#&gt;                      r1                      r2                      r3 </span>
+<span class="co">#&gt;      &quot;BRAF-M.CDKN2A-MD&quot;      &quot;CDKN2A-MD.NRAS-M&quot;        &quot;BRAF-M.PTEN-MD&quot; </span>
+<span class="co">#&gt;                     r29                     r13                     r32 </span>
+<span class="co">#&gt;         &quot;NRAS-M.TP53-M&quot; &quot;BRAF-M.HIPK2/TBXAS1-A&quot;    &quot;BRAF-M.RN7SKP254-A&quot;</span></code></pre></div>
+</div>
+<div id="make-generalized-core-results" class="section level1">
+<h1>Make generalized core results</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">list.subset.cores &lt;-<span class="st"> </span><span class="kw">makeSubCoreList</span>(D,Q,rm.ordered,til.filtered,num.gc.iter,num.gc.eval)
+<span class="co">#&gt; [1] &quot;Subset Core Iteration = 1&quot;</span>
+<span class="co">#&gt; [1] &quot;Subset Core Iteration = 2&quot;</span>
+<span class="co">#&gt; [1] &quot;Subset Core Iteration = 3&quot;</span>
+<span class="co">#&gt; [1] &quot;Subset Core Iteration = 4&quot;</span>
+<span class="co">#&gt; [1] &quot;Subset Core Iteration = 5&quot;</span>
+<span class="co">#&gt; [1] &quot;Subset Core Iteration = 6&quot;</span>
+<span class="co">#&gt; [1] &quot;Subset Core Iteration = 7&quot;</span>
+<span class="co">#&gt; [1] &quot;Subset Core Iteration = 8&quot;</span>
+<span class="co">#&gt; [1] &quot;Subset Core Iteration = 9&quot;</span>
+<span class="co">#&gt; [1] &quot;Subset Core Iteration = 10&quot;</span>
+<span class="co">#&gt; Time difference of 10.31857 secs</span>
+### list.subset.cores is a list of core rule set derived from subsampling iterations
+
+gcr.df &lt;-<span class="st"> </span><span class="kw">getGCRs</span>(list.subset.cores) <span class="co"># Generalized core rules</span>
+<span class="kw">print</span>(gcr.df)
+<span class="co">#&gt;                     GCR Confidence Confidence.Level</span>
+<span class="co">#&gt; 8         NRAS-M.TP53-M        100             High</span>
+<span class="co">#&gt; 7      CDKN2A-MD.NRAS-M        100             High</span>
+<span class="co">#&gt; 6      BRAF-M.CDKN2A-MD        100             High</span>
+<span class="co">#&gt; 5        BRAF-M.PTEN-MD         90             High</span>
+<span class="co">#&gt; 4 BRAF-M.HIPK2/TBXAS1-A         60           Medium</span>
+<span class="co">#&gt; 3    BRAF-M.RN7SKP254-A         40           Medium</span>
+<span class="co">#&gt; 2         BRAF-M.TP53-M         30              Low</span>
+<span class="co">#&gt; 1        ARID2-M.NRAS-M         10              Low</span>
+gcd.df &lt;-<span class="st"> </span><span class="kw">getGCDs</span>(list.subset.cores) <span class="co"># Generalized core duos</span>
+<span class="kw">print</span>(gcd.df)
+<span class="co">#&gt;                     GCD Confidence Confidence.Level</span>
+<span class="co">#&gt; 8         NRAS-M.TP53-M        100             High</span>
+<span class="co">#&gt; 7      CDKN2A-MD.NRAS-M        100             High</span>
+<span class="co">#&gt; 6      BRAF-M.CDKN2A-MD        100             High</span>
+<span class="co">#&gt; 5        BRAF-M.PTEN-MD         90             High</span>
+<span class="co">#&gt; 4 BRAF-M.HIPK2/TBXAS1-A         60           Medium</span>
+<span class="co">#&gt; 3    BRAF-M.RN7SKP254-A         40           Medium</span>
+<span class="co">#&gt; 2         BRAF-M.TP53-M         30              Low</span>
+<span class="co">#&gt; 1        ARID2-M.NRAS-M         10              Low</span>
+gce.df &lt;-<span class="st"> </span><span class="kw">getGCEs</span>(list.subset.cores) <span class="co"># Generalized core events</span>
+<span class="kw">print</span>(gce.df)
+<span class="co">#&gt;              GCE Confidence Confidence.Level</span>
+<span class="co">#&gt; 8         TP53-M        100             High</span>
+<span class="co">#&gt; 7         NRAS-M        100             High</span>
+<span class="co">#&gt; 6      CDKN2A-MD        100             High</span>
+<span class="co">#&gt; 5         BRAF-M        100             High</span>
+<span class="co">#&gt; 4        PTEN-MD         90             High</span>
+<span class="co">#&gt; 3 HIPK2/TBXAS1-A         60           Medium</span>
+<span class="co">#&gt; 2    RN7SKP254-A         40           Medium</span>
+<span class="co">#&gt; 1        ARID2-M         10              Low</span></code></pre></div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
